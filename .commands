@@ -1,0 +1,6 @@
+> npm run dev
+> npm run lint
+> npx vitest
+> npx playwright test
+> npm run build
+> npm start

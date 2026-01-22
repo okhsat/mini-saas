@@ -1,0 +1,22 @@
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests", // 👈 ONLY this folder
+
+  testMatch: "**/*.spec.ts", // 👈 ONLY spec files
+
+  timeout: 30 * 1000,
+
+  use: {
+    baseURL: "http://localhost:3000",
+    headless: true,
+  },
+
+  webServer: {
+    command: "npm run dev",
+    url: "http://localhost:3000",
+    //port: 3000,
+    reuseExistingServer: true,
+    timeout: 120 * 1000,
+  },
+});
