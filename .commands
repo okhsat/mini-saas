@@ -4,3 +4,11 @@
 > npx playwright test
 > npm run build
 > npm start
+> curl -X POST -i http://localhost:3000/api/login
+# Chrome DevTools:
+>> fetch("/api/login", {
+  method: "POST",
+});
+>> fetch("/api/logout", {
+  method: "POST",
+});
