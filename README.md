@@ -28,6 +28,3 @@ This project demonstrates authentication, protected routes, API routes, state ma
 - Playwright (E2E Testing)
 
 ---
-
-## 📂 Project Structure
-

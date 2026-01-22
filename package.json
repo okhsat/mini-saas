@@ -2,6 +2,25 @@
   "name": "mini-saas",
   "version": "0.1.0",
   "private": true,
+  "description": "Mini SaaS – Next.js Fullstack App (Next.js Demo/Test)",
+  "keywords": [
+    "Next.js",
+    "React",
+    "MiniSaaS",
+    "SaaS",
+    "Demo",
+    "Test"
+  ],
+  "homepage": "https://github.com/okhsat/mini-saas#readme",
+  "bugs": {
+    "url": "https://github.com/okhsat/mini-saas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:okhsat/mini-saas.git"
+  },
+  "license": "MIT",
+  "author": "Okhtay Sattari",
   "scripts": {
     "dev": "next dev",
     "lint": "eslint",
