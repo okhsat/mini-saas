@@ -8,14 +8,20 @@ const schema = z.object({
   email: z.email(),
 });
 
+type FormData = z.infer<typeof schema>;
+
 export default function UserForm() {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
+  function onSubmit(data: FormData) {
+    console.log("SUBMITTED", data.email);
+  }
+
   return (
     <form
-      onSubmit={handleSubmit(console.log)}
+      onSubmit={handleSubmit(onSubmit)}
       className="mt-6 space-y-4"
     >
       <input
