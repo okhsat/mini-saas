@@ -44,15 +44,6 @@ export default function Home() {
         This page is statically generated and SEO-friendly.
       </p>
 
-      <Image
-        className="mt-6 dark:invert"
-        src="/next.svg"
-        alt="Next.js logo"
-        width={100}
-        height={20}
-        priority
-      /> Demo / Test
-
       {isLoggedIn && (
         <button
           onClick={() => router.push("/dashboard")}
@@ -61,6 +52,15 @@ export default function Home() {
           Dashboard
         </button>
       )}
+
+      <Image
+        className="mt-6 dark:invert"
+        src="/next.svg"
+        alt="Next.js logo"
+        width={100}
+        height={20}
+        priority
+      /> Demo / Test
     </main>
   );
 }
