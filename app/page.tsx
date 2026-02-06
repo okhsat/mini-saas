@@ -34,6 +34,26 @@ export default function Home() {
     
   }, [login, logout]);
 
+  // Login handler
+  const handleLogin = async () => {
+    await fetch("/api/login", {
+      method: "POST",
+    });
+
+    login(); // update store
+    router.refresh(); // refresh server components
+  };
+
+  // Logout handler
+  const handleLogout = async () => {
+    await fetch("/api/logout", {
+      method: "POST",
+    });
+
+    logout();
+    router.refresh();
+  };
+
   return (
     <main className="p-10">
       <h1 className="text-3xl font-bold">
@@ -44,13 +64,33 @@ export default function Home() {
         This page is statically generated and SEO-friendly.
       </p>
 
-      {isLoggedIn && (
+      {/* AUTH BUTTONS */}
+
+      {! isLoggedIn && (
         <button
-          onClick={() => router.push("/dashboard")}
-          className="mt-6 block rounded bg-blue-600 px-4 py-2 text-white"
+          onClick={handleLogin}
+          className="my-5 cursor-pointer rounded bg-green-600 px-4 py-2 text-white"
         >
-          Dashboard
+          Login
         </button>
+      )}
+
+      {isLoggedIn && (
+        <>
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="mt-6 cursor-pointer block rounded bg-blue-600 px-4 py-2 text-white"
+          >
+            Dashboard
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="my-5 cursor-pointer rounded bg-red-600 px-4 py-2 text-white"
+          >
+            Logout
+          </button>
+        </>
       )}
 
       <Image

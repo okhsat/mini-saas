@@ -29,7 +29,7 @@ export default function UserForm() {
         className="border p-2"
         placeholder="Email"
       />
-      <button className="rounded bg-blue-500 px-4 py-2 text-white">
+      <button className="ml-1 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white">
         Submit
       </button>
     </form>
