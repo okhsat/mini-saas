@@ -25,7 +25,7 @@ describe("Test User Form", () => {
 
     expect(spy).toHaveBeenCalledWith(
       "SUBMITTED",
-      "test@example.com"
+      { email: "test@example.com" }
     );
   });
 
