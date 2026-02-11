@@ -5,18 +5,26 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-  email: z.email(),
+  email: z
+    .email("Invalid email")
+    .min(1, "Email is required"),
 });
 
 type FormData = z.infer<typeof schema>;
 
 export default function UserForm() {
-  const { register, handleSubmit } = useForm<FormData>({
+  const { 
+    register, 
+    handleSubmit,
+    formState: { errors },
+
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   function onSubmit(data: FormData) {
-    console.log("SUBMITTED", data.email);
+    alert("Submitted: " + data.email);
+    console.log("SUBMITTED", data);
   }
 
   return (
@@ -29,7 +37,16 @@ export default function UserForm() {
         className="border p-2"
         placeholder="Email"
       />
-      <button className="ml-1 cursor-pointer rounded bg-blue-500 px-4 py-2 text-white">
+      
+      {errors.email && (
+        <p className="text-red-500 text-sm">
+          {errors.email.message}
+        </p>
+      )}
+
+      <br/>
+
+      <button type="submit" className="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white">
         Submit
       </button>
     </form>
