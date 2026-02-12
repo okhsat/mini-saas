@@ -1,5 +1,6 @@
 import { describe, test, expect, vi, afterEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import UserForm from "./form";
 
 describe("Test User Form", () => {
@@ -8,41 +9,42 @@ describe("Test User Form", () => {
   });
 
   test("valid email submits", async () => {
-    const spy = vi.spyOn(console, "log");
+    const logSpy = vi.spyOn(console, "log");
+
+    vi.spyOn(window, "alert").mockImplementation(() => {});
 
     render(<UserForm />);
 
-    fireEvent.change(
-      screen.getByPlaceholderText("Email"),
-      { target: { value: "test@example.com" } }
-    );
+    const input = screen.getByPlaceholderText("Email");
+    const button = screen.getByRole("button", { name: /submit/i });
 
-    fireEvent.click(
-      screen.getByText("Submit")
-    );
-
+    await userEvent.type(input, "test@example.com");
+    await userEvent.click(button);
     await screen.findByDisplayValue("test@example.com");
 
-    expect(spy).toHaveBeenCalledWith(
+    expect(logSpy).toHaveBeenCalledWith(
       "SUBMITTED",
       { email: "test@example.com" }
     );
   });
 
   test("invalid email is rejected", async () => {
-    const spy = vi.spyOn(console, "log");
+    const logSpy = vi.spyOn(console, "log");
+
+    vi.spyOn(window, "alert").mockImplementation(() => {});
 
     render(<UserForm />);
 
-    fireEvent.change(
-      screen.getByPlaceholderText("Email"),
-      { target: { value: "wrong-email" } }
-    );
+    const input = screen.getByPlaceholderText("Email");
+    const button = screen.getByRole("button", { name: /submit/i });
 
-    fireEvent.click(screen.getByText("Submit"));
+    await userEvent.type(input, "wrong-email");
+    await userEvent.click(button);
 
-    await new Promise((r) => setTimeout(r, 200));
+    // Proper assertion for validation message
+    expect(await screen.findByText("Invalid email"))
+      .toBeInTheDocument();
 
-    expect(spy).not.toHaveBeenCalled();
+    expect(logSpy).not.toHaveBeenCalled();
   });
 });

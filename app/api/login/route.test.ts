@@ -4,7 +4,6 @@ import { POST } from "./route";
 describe("POST /api/login", () => {
   test("sets auth cookie", async () => {
     const res = await POST();
-
     const cookies = res.headers.get("set-cookie");
 
     expect(cookies).toContain("auth=true");

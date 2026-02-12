@@ -8,9 +8,7 @@ test("dashboard displays users", async ({ page }: { page: Page }) => {
       domain: "localhost",
       path: "/",
     },
-  ]);
-  
+  ]);  
   await page.goto("http://localhost:3000/dashboard");
-
   await expect(page.getByText("Alice")).toBeVisible();
 });
